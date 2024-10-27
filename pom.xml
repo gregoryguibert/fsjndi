@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.sirconflex.utils</groupId>
   <artifactId>fsjndi</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>Simple Java Object jndi</name>
   <description>Simple jndi based on file system</description>
   
