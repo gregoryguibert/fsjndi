@@ -31,18 +31,18 @@ public class JndiPropertiesTest {
         }
         testDir.mkdir();
     	
-        // Chargement des propriétés JNDI depuis jndi.properties dans src/test/resources
+        // Chargement des propriï¿½tï¿½s JNDI depuis jndi.properties dans src/test/resources
     	
         Properties jndiProps = new Properties();
         jndiProps.load(getClass().getClassLoader().getResourceAsStream("jndi.properties"));
 
-        // Initialisation du contexte avec les propriétés JNDI
+        // Initialisation du contexte avec les propriï¿½tï¿½s JNDI
         context = new InitialContext(jndiProps);
     }
 
     @Test
     public void testReBindAndLookup_WithJndiProperties() throws NamingException {
-        // Test de la liaison et de la récupération d'un objet en utilisant jndi.properties
+        // Test de la liaison et de la rï¿½cupï¿½ration d'un objet en utilisant jndi.properties
         String expectedValue = "Hello from JNDI Properties!";
         context.rebind("testString", expectedValue);
 
@@ -53,7 +53,7 @@ public class JndiPropertiesTest {
     
     @Test
     public void testBindAndLookup_WithJndiProperties() throws NamingException {
-        // Test de la liaison et de la récupération d'un objet en utilisant jndi.properties
+        // Test de la liaison et de la rï¿½cupï¿½ration d'un objet en utilisant jndi.properties
         String expectedValue = "My name is groot";
         context.bind("iamgroot", expectedValue);
 
@@ -64,10 +64,10 @@ public class JndiPropertiesTest {
 
     @Test
     public void testInitialContextCreation() throws NamingException {
-        // Vérifie que le contexte a été correctement initialisé avec jndi.properties
+        // Vï¿½rifie que le contexte a ï¿½tï¿½ correctement initialisï¿½ avec jndi.properties
         assertNotNull(context);
 
-        // Test d'une liaison supplémentaire pour vérifier le fonctionnement global
+        // Test d'une liaison supplï¿½mentaire pour vï¿½rifier le fonctionnement global
         Integer expectedInteger = 123;
         context.bind("testInteger", expectedInteger);
 
@@ -81,32 +81,32 @@ public class JndiPropertiesTest {
         String expectedValue = "Unbind Test String";
         context.bind("testUnbind", expectedValue);
 
-        // Vérification que l'objet est bien lié
+        // Vï¿½rification que l'objet est bien liï¿½
         String actualValue = (String) context.lookup("testUnbind");
         assertEquals(expectedValue, actualValue);
 
         // Suppression de la liaison
         context.unbind("testUnbind");
 
-        // Vérification que la liaison a été supprimée
+        // Vï¿½rification que la liaison a ï¿½tï¿½ supprimï¿½e
         assertThrows(NameNotFoundException.class, () -> context.lookup("testUnbind"));
     }    
     
     
     @Test
     public void testClose() throws NamingException {
-        // Lier un objet pour vérifier son accès avant la fermeture
+        // Lier un objet pour verifier son acces avant la fermeture
         String expectedValue = "Close Test String";
         context.bind("testClose", expectedValue);
 
-        // Vérification que l'objet est bien lié
+        // Verification que l'objet est bien lie
         String actualValue = (String) context.lookup("testClose");
         assertEquals(expectedValue, actualValue);
 
         // Fermer le contexte
         context.close();
         
-        // Vérifier que les appels de méthodes après fermeture lancent des NamingException
+        // Verifier que les appels de methodes apres fermeture lancent des NamingException
         assertThrows(NamingException.class, () -> context.lookup("testClose"));
         assertThrows(NamingException.class, () -> context.bind("testAfterClose", "Another String"));
         assertThrows(NamingException.class, () -> context.unbind("testClose"));
